@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAI PEI YEN - Student Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset and Global Styles */
+        :root {
+            /* Rule 4 & Theme Update: Clean, Scientific, and Modern Color Palette */
+            --color-white: #ffffff;
+            --color-light-grey: #f7f9fc;
+            --color-medium-grey: #e1e4eb;
+            --color-dark-grey: #2e3540;
+            --color-accent: #004d99; /* Deep Ocean Blue (UMT Theme Match) */
+            --color-text-body: #4a5568;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-light-grey);
+            color: var(--color-dark-grey);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Bento Grid Container */
+        .bento-grid {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            gap: 16px; /* Spacing between cards */
+            
+            /* Rule 2: Grid Layout on Desktop */
+            grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+            grid-template-rows: auto auto auto; /* 3 rows defined by content */
+            grid-auto-flow: dense; /* Allows items to fill gaps */
+        }
+
+        /* Bento Card Styles */
+        .bento-card {
+            background-color: var(--color-white);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--color-medium-grey);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--color-dark-grey);
+        }
+
+        .card-content {
+            font-size: 0.95rem;
+            color: var(--color-text-body);
+        }
+
+        /* Content-Specific Styles */
+        .profile h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            line-height: 1.1;
+            color: var(--color-accent);
+        }
+
+        .profile p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--color-dark-grey);
+            margin-bottom: 15px;
+        }
+        
+        .profile .tagline {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--color-text-body);
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding-left: 5px;
+            border-left: 3px solid var(--color-medium-grey);
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: var(--color-text-body);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .location p:first-child {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .location p:last-child {
+            font-size: 1.2rem;
+        }
+
+        .tech-stack ul,
+        .case-study ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-stack li,
+        .case-study li {
+            background-color: var(--color-light-grey);
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-left: 3px solid var(--color-accent);
+        }
+        
+        .case-study .description {
+            margin-top: 10px;
+            font-weight: 500;
+            font-style: italic;
+            border-bottom: 1px dashed var(--color-medium-grey);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .playlist {
+            /* Ensures the playlist content takes up the full width */
+            grid-column: 1 / -1; 
+            padding: 20px 24px;
+            background-color: var(--color-dark-grey);
+            color: var(--color-light-grey);
+            text-align: center;
+        }
+
+        .playlist .card-title {
+            color: var(--color-light-grey);
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        
+        .playlist .card-content {
+            color: #b0c4de;
+        }
+
+        /* Card Sizing based on Layout */
+
+        /* Card 1: Profile (Large Box: 2x2) */
+        .card-1 {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* Card 2: Location (Small Box: 1x1) */
+        .card-2 {
+            grid-column: span 1;
+        }
+
+        /* Card 3: Tech Stack (Medium Box: 1x2) */
+        .card-3 {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+
+        /* Card 4: Case Study (Medium Box: 1x1) */
+        .card-4 {
+            grid-column: span 1;
+        }
+
+        /* Card 5: Hobby (Small Box: 1x1) */
+        .card-5 {
+            grid-column: span 1;
+        }
+
+        /* Card 6: Playlist (Wide Box: 4x1) */
+        .card-6 {
+            grid-column: 1 / -1; /* Start at col 1, end at the last line */
+        }
+
+
+        /* Rule 2: Fully Responsive - Mobile Layout (Stacked Vertically) */
+        @media (max-width: 768px) {
+            .bento-grid {
+                /* Single column layout for mobile */
+                grid-template-columns: 1fr; 
+                gap: 12px;
+            }
+
+            /* All cards should stack vertically and take full width on mobile */
+            .card-1, .card-2, .card-3, .card-4, .card-5, .card-6 {
+                grid-column: 1 / -1;
+                grid-row: auto;
+            }
+
+            .profile h1 {
+                font-size: 2rem;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bento-grid">
+        
+        <div class="bento-card card-1 profile">
+            <div>
+                <h1>LAI PEI YEN</h1>
+                <p>Food Science (Food Technology)</p>
+                <p>Year 1</p>
+                <div class="tagline">'Innovating food safety.'</div>
+            </div>
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+                <a href="#">UMT Portal</a>
+            </div>
+        </div>
+        
+        <div class="bento-card card-2 location">
+            <p>UMT</p>
+            <p>Kuala Nerus, MY</p>
+            <small class="card-content">Local Time: 10:21 AM</small>
+        </div>
+
+        <div class="bento-card card-4 case-study">
+            <h2 class="card-title">Web Application for Nutritional Product Development</h2>
+            <div class="card-content">
+                <p class="description">R&D using Data Analytics for Food Formulation.</p>
+                <p>Key Project Stages:</p>
+                <ul>
+                    <li>Phase 1: Data Collection & Cleaning (Nutrient Profiles)</li>
+                    <li>Phase 2: Predictive Modeling (Ingredient Optimization)</li>
+                    <li>Phase 3: User Interface Design (Web App Mockup)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bento-card card-3 tech-stack">
+            <h2 class="card-title">Current Semester Subjects</h2>
+            <ul class="card-content">
+                <li>Biochemistry</li>
+                <li>Principle of Physical Chemistry</li>
+                <li>Principle of Organic Chemistry</li>
+                <li>Computer System and Application</li>
+                <li>Engineering Mathematics</li>
+            </ul>
+        </div>
+        
+        <div class="bento-card card-5 hobby">
+            <h2 class="card-title">Hobby Focus</h2>
+            <div class="card-content">
+                <p>Listening to Music (Primary Focus)</p>
+                <p>Genre: Instrumental and Ambient focus for deep concentration.</p>
+            </div>
+        </div>
+
+        <div class="bento-card card-6 playlist">
+            <h2 class="card-title">Study Focus Playlist 🎧</h2>
+            <p class="card-content">Playlist Placeholder: Deep focus instrumental tracks for Food Science research.</p>
+            <p class="card-content">Next task: Setting up the analytical instrument for the Chemistry lab.</p>
+        </div>
+        
+    </div>
+
+</body>
+</html>
