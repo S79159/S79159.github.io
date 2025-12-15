@@ -44,9 +44,10 @@
             gap: 16px; /* Spacing between cards */
             
             /* Rule 2: Grid Layout on Desktop */
-            grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
-            grid-template-rows: auto auto auto; /* 3 rows defined by content */
-            grid-auto-flow: dense; /* Allows items to fill gaps */
+            /* New Grid Structure: 4 columns. We will rearrange the small boxes. */
+            grid-template-columns: repeat(4, 1fr); 
+            grid-template-rows: auto auto auto auto; /* Adjusted row count for new card */
+            grid-auto-flow: dense;
         }
 
         /* Bento Card Styles */
@@ -56,15 +57,17 @@
             padding: 24px;
             border: 1px solid var(--color-medium-grey);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
+            /* Added transition for smooth hover effect */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
+        /* Theme Tweak 3: Subtle Hover Effect (Zoom) */
         .bento-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px) scale(1.01); /* Lift up and slightly zoom */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
         .card-title {
@@ -153,6 +156,17 @@
             padding-bottom: 10px;
             margin-bottom: 10px;
         }
+        
+        /* New Card 7 Styling */
+        .reflection .card-content {
+            font-size: 1.0rem;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .reflection .card-content strong {
+            color: var(--color-accent);
+        }
+
 
         .playlist {
             /* Ensures the playlist content takes up the full width */
@@ -181,30 +195,40 @@
             grid-row: span 2;
         }
 
-        /* Card 2: Location (Small Box: 1x1) */
+        /* Card 2: Location (Small Box: 1x1) - Top right column 3 */
         .card-2 {
-            grid-column: span 1;
+            grid-column: 3 / span 1;
+            grid-row: 1 / span 1;
         }
 
-        /* Card 3: Tech Stack (Medium Box: 1x2) */
-        .card-3 {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-
-        /* Card 4: Case Study (Medium Box: 1x1) */
+        /* Card 4: Case Study (Medium Box: 1x1) - Under Card 2 (Top right column 4) */
         .card-4 {
-            grid-column: span 1;
+            grid-column: 4 / span 1;
+            grid-row: 1 / span 1;
         }
 
-        /* Card 5: Hobby (Small Box: 1x1) */
+        /* Card 3: Tech Stack (Medium Box: 1x2) - Under Card 4, spanning 2 rows */
+        .card-3 {
+            grid-column: 4 / span 1;
+            grid-row: 2 / span 2;
+        }
+        
+        /* Card 5: Hobby (Small Box: 1x1) - Under Card 2 */
         .card-5 {
-            grid-column: span 1;
+            grid-column: 3 / span 1;
+            grid-row: 2 / span 1;
+        }
+        
+        /* Card 7: Reflection (New Card, Small Box: 1x1) - Under Card 5 */
+        .card-7 {
+            grid-column: 3 / span 1;
+            grid-row: 3 / span 1;
         }
 
-        /* Card 6: Playlist (Wide Box: 4x1) */
+        /* Card 6: Playlist (Wide Box: 4x1) - Bottom row */
         .card-6 {
-            grid-column: 1 / -1; /* Start at col 1, end at the last line */
+            grid-column: 1 / -1; 
+            grid-row: 4 / span 1;
         }
 
 
@@ -217,7 +241,7 @@
             }
 
             /* All cards should stack vertically and take full width on mobile */
-            .card-1, .card-2, .card-3, .card-4, .card-5, .card-6 {
+            .card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7 {
                 grid-column: 1 / -1;
                 grid-row: auto;
             }
@@ -244,16 +268,15 @@
                 <div class="tagline">'Innovating food safety.'</div>
             </div>
             <div class="social-links">
-                <a href="#">LinkedIn</a>
-                <a href="#">GitHub</a>
-                <a href="#">UMT Portal</a>
+                <a href="https://github.com/S79159" target="_blank">GitHub</a>
+                <a href="#" target="_blank">UMT Portal</a>
             </div>
         </div>
         
         <div class="bento-card card-2 location">
             <p>UMT</p>
             <p>Kuala Nerus, MY</p>
-            <small class="card-content">Local Time: 10:21 AM</small>
+            <small class="card-content">Local Time: 10:46 AM</small> 
         </div>
 
         <div class="bento-card card-4 case-study">
@@ -269,6 +292,21 @@
             </div>
         </div>
 
+        <div class="bento-card card-5 hobby">
+            <h2 class="card-title">Hobby Focus</h2>
+            <div class="card-content">
+                <p>Listening to Music (Primary Focus)</p>
+                <p>Genre: Instrumental and Ambient focus for deep concentration.</p>
+            </div>
+        </div>
+
+        <div class="bento-card card-7 reflection">
+            <h2 class="card-title">Why Food Tech Matters in Malaysia</h2>
+            <p class="card-content">
+                <strong>Sustainable food security</strong> is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.
+            </p>
+        </div>
+
         <div class="bento-card card-3 tech-stack">
             <h2 class="card-title">Current Semester Subjects</h2>
             <ul class="card-content">
@@ -280,17 +318,14 @@
             </ul>
         </div>
         
-        <div class="bento-card card-5 hobby">
-            <h2 class="card-title">Hobby Focus</h2>
-            <div class="card-content">
-                <p>Listening to Music (Primary Focus)</p>
-                <p>Genre: Instrumental and Ambient focus for deep concentration.</p>
-            </div>
-        </div>
-
         <div class="bento-card card-6 playlist">
             <h2 class="card-title">Study Focus Playlist 🎧</h2>
             <p class="card-content">Playlist Placeholder: Deep focus instrumental tracks for Food Science research.</p>
+<iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/playlist/0vvXsWCC9xrXsKd4FyS8kM?ut
+m_source=generator&theme=0" width="100%" height="152" frameBorder="0"
+allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media;
+fullscreen; picture-in-picture" loading="lazy"></iframe>
             <p class="card-content">Next task: Setting up the analytical instrument for the Chemistry lab.</p>
         </div>
         
