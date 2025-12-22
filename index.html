@@ -9,13 +9,13 @@
     <style>
         /* CSS Reset and Global Styles */
         :root {
-            /* Rule 4 & Theme Update: Clean, Scientific, and Modern Color Palette */
             --color-white: #ffffff;
             --color-light-grey: #f7f9fc;
             --color-medium-grey: #e1e4eb;
             --color-dark-grey: #2e3540;
             --color-accent: #004d99; /* Deep Ocean Blue (UMT Theme Match) */
             --color-text-body: #4a5568;
+            --color-button-hover: #003366;
         }
 
         * {
@@ -41,12 +41,9 @@
             width: 100%;
             max-width: 1200px;
             display: grid;
-            gap: 16px; /* Spacing between cards */
-            
-            /* Rule 2: Grid Layout on Desktop */
-            /* New Grid Structure: 4 columns. We will rearrange the small boxes. */
+            gap: 16px; 
             grid-template-columns: repeat(4, 1fr); 
-            grid-template-rows: auto auto auto auto; /* Adjusted row count for new card */
+            grid-template-rows: auto auto auto auto; 
             grid-auto-flow: dense;
         }
 
@@ -57,16 +54,14 @@
             padding: 24px;
             border: 1px solid var(--color-medium-grey);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            /* Added transition for smooth hover effect */
             transition: transform 0.3s ease-in-out, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        /* Theme Tweak 3: Subtle Hover Effect (Zoom) */
         .bento-card:hover {
-            transform: translateY(-4px) scale(1.01); /* Lift up and slightly zoom */
+            transform: translateY(-4px) scale(1.01);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
@@ -121,6 +116,31 @@
             color: var(--color-accent);
         }
 
+        /* Case Study Button Styles */
+        .app-link-container {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--color-medium-grey);
+        }
+
+        .btn-app {
+            display: block;
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            text-align: center;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-app:hover {
+            background-color: var(--color-button-hover);
+            transform: translateY(-2px);
+        }
+
         .location p:first-child {
             font-size: 1.8rem;
             font-weight: 700;
@@ -157,7 +177,6 @@
             margin-bottom: 10px;
         }
         
-        /* New Card 7 Styling */
         .reflection .card-content {
             font-size: 1.0rem;
             font-weight: 500;
@@ -167,9 +186,7 @@
             color: var(--color-accent);
         }
 
-
         .playlist {
-            /* Ensures the playlist content takes up the full width */
             grid-column: 1 / -1; 
             padding: 20px 24px;
             background-color: var(--color-dark-grey);
@@ -187,72 +204,23 @@
             color: #b0c4de;
         }
 
-        /* Card Sizing based on Layout */
+        /* Card Sizing */
+        .card-1 { grid-column: span 2; grid-row: span 2; }
+        .card-2 { grid-column: 3 / span 1; grid-row: 1 / span 1; }
+        .card-4 { grid-column: 4 / span 1; grid-row: 1 / span 1; }
+        .card-3 { grid-column: 4 / span 1; grid-row: 2 / span 2; }
+        .card-5 { grid-column: 3 / span 1; grid-row: 2 / span 1; }
+        .card-7 { grid-column: 3 / span 1; grid-row: 3 / span 1; }
+        .card-6 { grid-column: 1 / -1; grid-row: 4 / span 1; }
 
-        /* Card 1: Profile (Large Box: 2x2) */
-        .card-1 {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        /* Card 2: Location (Small Box: 1x1) - Top right column 3 */
-        .card-2 {
-            grid-column: 3 / span 1;
-            grid-row: 1 / span 1;
-        }
-
-        /* Card 4: Case Study (Medium Box: 1x1) - Under Card 2 (Top right column 4) */
-        .card-4 {
-            grid-column: 4 / span 1;
-            grid-row: 1 / span 1;
-        }
-
-        /* Card 3: Tech Stack (Medium Box: 1x2) - Under Card 4, spanning 2 rows */
-        .card-3 {
-            grid-column: 4 / span 1;
-            grid-row: 2 / span 2;
-        }
-        
-        /* Card 5: Hobby (Small Box: 1x1) - Under Card 2 */
-        .card-5 {
-            grid-column: 3 / span 1;
-            grid-row: 2 / span 1;
-        }
-        
-        /* Card 7: Reflection (New Card, Small Box: 1x1) - Under Card 5 */
-        .card-7 {
-            grid-column: 3 / span 1;
-            grid-row: 3 / span 1;
-        }
-
-        /* Card 6: Playlist (Wide Box: 4x1) - Bottom row */
-        .card-6 {
-            grid-column: 1 / -1; 
-            grid-row: 4 / span 1;
-        }
-
-
-        /* Rule 2: Fully Responsive - Mobile Layout (Stacked Vertically) */
         @media (max-width: 768px) {
-            .bento-grid {
-                /* Single column layout for mobile */
-                grid-template-columns: 1fr; 
-                gap: 12px;
-            }
-
-            /* All cards should stack vertically and take full width on mobile */
+            .bento-grid { grid-template-columns: 1fr; gap: 12px; }
             .card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7 {
                 grid-column: 1 / -1;
                 grid-row: auto;
             }
-
-            .profile h1 {
-                font-size: 2rem;
-            }
-            
-            body {
-                padding: 10px;
-            }
+            .profile h1 { font-size: 2rem; }
+            body { padding: 10px; }
         }
     </style>
 </head>
@@ -280,53 +248,55 @@
         </div>
 
         <div class="bento-card card-4 case-study">
-            <h2 class="card-title">Web Application for Nutritional Product Development</h2>
+            <h2 class="card-title">Nutritional Product Development</h2>
             <div class="card-content">
-                <p class="description">R&D using Data Analytics for Food Formulation.</p>
-                <p>Key Project Stages:</p>
+                <p class="description">R&D Data Analytics App.</p>
                 <ul>
-                    <li>Phase 1: Data Collection & Cleaning (Nutrient Profiles)</li>
-                    <li>Phase 2: Predictive Modeling (Ingredient Optimization)</li>
-                    <li>Phase 3: User Interface Design (Web App Mockup)</li>
+                    <li>Phase 1: Nutrient Profiling</li>
+                    <li>Phase 2: Predictive Modeling</li>
+                    <li>Phase 3: Web App Mockup</li>
                 </ul>
+                <div class="app-link-container">
+                    <a href="https://s79159.github.io/focus-timer-app/app.html" target="_blank" class="btn-app">
+                        Try My Focus Timer App →
+                    </a>
+                </div>
             </div>
         </div>
 
         <div class="bento-card card-5 hobby">
             <h2 class="card-title">Hobby Focus</h2>
             <div class="card-content">
-                <p>Listening to Music (Primary Focus)</p>
-                <p>Genre: Instrumental and Ambient focus for deep concentration.</p>
+                <p>Listening to Music</p>
+                <p>Genre: Instrumental/Ambient.</p>
             </div>
         </div>
 
         <div class="bento-card card-7 reflection">
-            <h2 class="card-title">Why Food Tech Matters in Malaysia</h2>
+            <h2 class="card-title">Sustainable Security</h2>
             <p class="card-content">
-                <strong>Sustainable food security</strong> is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.
+                Optimizing local processing reduces waste and improves nutrition.
             </p>
         </div>
 
         <div class="bento-card card-3 tech-stack">
-            <h2 class="card-title">Current Semester Subjects</h2>
+            <h2 class="card-title">Semester Subjects</h2>
             <ul class="card-content">
                 <li>Biochemistry</li>
-                <li>Principle of Physical Chemistry</li>
-                <li>Principle of Organic Chemistry</li>
-                <li>Computer System and Application</li>
+                <li>Physical Chemistry</li>
+                <li>Organic Chemistry</li>
+                <li>Computer Systems</li>
                 <li>Engineering Mathematics</li>
             </ul>
         </div>
         
         <div class="bento-card card-6 playlist">
             <h2 class="card-title">Study Focus Playlist 🎧</h2>
-            <p class="card-content">Playlist Placeholder: Deep focus instrumental tracks for Food Science research.</p>
-<iframe style="border-radius:12px"
-src="https://open.spotify.com/embed/playlist/0vvXsWCC9xrXsKd4FyS8kM?ut
-m_source=generator&theme=0" width="100%" height="152" frameBorder="0"
-allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media;
-fullscreen; picture-in-picture" loading="lazy"></iframe>
-            <p class="card-content">Next task: Setting up the analytical instrument for the Chemistry lab.</p>
+            <p class="card-content">Deep focus tracks for Food Science research.</p>
+            <iframe style="border-radius:12px; margin-top:10px"
+            src="https://open.spotify.com/embed/playlist/0vvXsWCC9xrXsKd4FyS8kM?ut" width="100%" height="152" frameBorder="0"
+            allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media;
+            fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
         
     </div>
